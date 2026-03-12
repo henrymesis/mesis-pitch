@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MESIS - 큐리즘 엘리베이터 피치</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #e8e8e8;
+    color: #1a1a1a;
+    scroll-behavior: smooth;
+  }
+
+  .slide {
+    width: 960px;
+    height: 540px;
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+
+  /* ===== COMMON ===== */
+  .logo-top-right {
+    position: absolute;
+    top: 28px; right: 56px;
+    z-index: 10;
+  }
+  .logo-top-right img {
+    height: 38px;
+    width: auto;
+  }
+  .logo-top-right img.white-logo {
+    filter: brightness(0) invert(1);
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 18px; right: 56px;
+    font-size: 10px;
+    font-weight: 500;
+    color: #bbb;
+    letter-spacing: 1px;
+  }
+  .page-num.white { color: rgba(255,255,255,0.3); }
+
+  .section-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: #FF6B4A;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  .section-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.45;
+  }
+  .section-title em {
+    font-style: normal;
+    color: #FF6B4A;
+  }
+
+  /* ===== SLIDE 1: TEAM ===== */
+  .slide-1 {
+    background: #ffffff;
+    padding: 36px 56px 32px;
+  }
+  .s1-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+  .s1-title-area { flex: 1; }
+  .s1-service-name {
+    font-size: 34px;
+    font-weight: 900;
+    color: #FF6B4A;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .s1-service-sub {
+    font-size: 12px;
+    font-weight: 500;
+    color: #FF6B4A;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .s1-tagline {
+    font-size: 17px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .s1-tagline strong {
+    font-weight: 700;
+    color: #FF6B4A;
+  }
+
+  /* Timeline */
+  .s1-timeline {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin: 0 0 18px 0;
+    position: relative;
+    padding: 0 20px;
+  }
+  .s1-timeline-line {
+    position: absolute;
+    top: 6px;
+    left: 60px; right: 60px;
+    height: 2px;
+    background: #eee;
+    z-index: 0;
+  }
+  .s1-timeline-item {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .s1-timeline-dot {
+    width: 12px; height: 12px;
+    background: #FF6B4A;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    box-shadow: 0 0 0 3px rgba(255,107,74,0.15);
+  }
+  .s1-timeline-year {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FF6B4A;
+  }
+  .s1-timeline-desc {
+    font-size: 11px;
+    color: #888;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  /* Revenue bar */
+  .s1-revenue {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    height: 64px;
+    border-top: none;
+    padding-top: 6px;
+  }
+  .s1-rev-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    position: relative;
+  }
+  .s1-rev-growth {
+    font-size: 9px;
+    font-weight: 700;
+    color: #FF6B4A;
+    background: rgba(255,107,74,0.08);
+    padding: 1px 5px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+  .s1-rev-bar {
+    width: 48px;
+    background: linear-gradient(180deg, #FF6B4A 0%, #ff8f73 100%);
+    border-radius: 4px 4px 0 0;
+    min-height: 6px;
+  }
+  .s1-rev-amount {
+    font-size: 11px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-top: 2px;
+  }
+  .s1-rev-amount span {
+    font-size: 9px;
+    font-weight: 600;
+    color: #999;
+  }
+
+  /* Team cards */
+  .s1-team-grid {
+    display: flex;
+    gap: 16px;
+  }
+  .s1-team-card {
+    flex: 1;
+    background: #F5F5F5;
+    border-radius: 12px;
+    padding: 18px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .s1-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #FF6B4A;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .s1-avatar-photo {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid #eee;
+  }
+  .s1-team-info { flex: 1; }
+  .s1-team-role {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FF6B4A;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .s1-team-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 3px;
+  }
+  .s1-team-desc {
+    font-size: 11px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  /* ===== SLIDE 2: PROBLEM + APPROACH ===== */
+  .slide-2 {
+    background: #ffffff;
+    padding: 40px 56px;
+  }
+  .s2-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  .s2-body {
+    display: flex;
+    gap: 24px;
+    height: 360px;
+  }
+  .s2-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .s2-barrier {
+    flex: 1;
+    background: #F5F5F5;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .s2-barrier-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #FF6B4A;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .s2-barrier-icon.dark { background: #1a1a1a; }
+  .s2-barrier-icon.muted { background: #888; }
+  .s2-barrier-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 3px;
+  }
+  .s2-barrier-desc {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+  }
+  .s2-barrier-stat {
+    font-size: 22px;
+    font-weight: 900;
+    color: #FF6B4A;
+    margin-left: auto;
+    flex-shrink: 0;
+    text-align: right;
+    line-height: 1.2;
+  }
+  .s2-barrier-stat-unit {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .s2-divider {
+    width: 1px;
+    background: #eee;
+    flex-shrink: 0;
+    margin: 10px 0;
+  }
+  .s2-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .s2-approach-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FF6B4A;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+  .s2-infra-card {
+    flex: 1;
+    background: #F5F5F5;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .s2-infra-card-with-img {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+  .s2-infra-card-with-img .s2-infra-text { flex: 1; }
+  .s2-poc-img {
+    width: 100px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    border: 1px solid #e0e0e0;
+    filter: brightness(1.1);
+  }
+  .s2-poc-label {
+    font-size: 8px;
+    color: #999;
+    text-align: center;
+    margin-top: 3px;
+    white-space: nowrap;
+  }
+  .s2-infra-card.highlight {
+    background: #1a1a1a;
+    color: #fff;
+  }
+  .s2-infra-stat {
+    font-size: 28px;
+    font-weight: 900;
+    color: #FF6B4A;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .s2-infra-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+  .s2-infra-card.highlight .s2-infra-name {
+    color: #fff;
+  }
+  .s2-infra-desc {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.5;
+  }
+  .s2-infra-card.highlight .s2-infra-desc {
+    color: rgba(255,255,255,0.5);
+  }
+  .s2-infra-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+    padding: 4px 0;
+    flex-shrink: 0;
+  }
+  .s2-infra-flow-arrow {
+    color: #FF6B4A;
+    font-size: 16px;
+  }
+
+  /* ===== SLIDE 3: SOLUTION ===== */
+  .slide-3 {
+    background: #ffffff;
+    padding: 32px 56px 28px;
+  }
+  .s3-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 4px;
+  }
+  .s3-feats-note {
+    font-size: 11px;
+    font-weight: 500;
+    color: #999;
+    margin-bottom: 10px;
+    padding-left: 44px;
+    line-height: 1.4;
+  }
+  .s3-feats-note strong {
+    color: #FF6B4A;
+    font-weight: 700;
+  }
+
+  /* Main body: left steps + right chart */
+  .s3-body {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .s3-steps-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .s3-step {
+    flex: 1;
+    background: #F5F5F5;
+    border-radius: 10px;
+    padding: 8px 16px 8px 18px;
+    display: flex;
+    flex-direction: column;
+  }
+  .s3-step-label {
+    display: inline-block;
+    background: #FF6B4A;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    letter-spacing: 0.3px;
+    align-self: flex-start;
+  }
+  .s3-step-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 3px;
+  }
+  .s3-step-desc {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .s3-step-desc strong {
+    color: #FF6B4A;
+    font-weight: 600;
+  }
+
+  /* FEATS chart panel - Mock UI */
+  .s3-chart-panel {
+    width: 210px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .s3-mock-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 10px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .s3-mock-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+  }
+  .s3-mock-dot.red { background: #ff5f57; }
+  .s3-mock-dot.yellow { background: #ffbd2e; }
+  .s3-mock-dot.green { background: #28c840; }
+  .s3-mock-titlebar-text {
+    font-size: 9px;
+    font-weight: 600;
+    color: #aaa;
+    margin-left: auto;
+    letter-spacing: 0.3px;
+  }
+  .s3-chart-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 12px 8px;
+    flex: 1;
+    justify-content: center;
+  }
+  .s3-chart-body img {
+    width: 155px;
+    height: auto;
+    margin-bottom: 6px;
+  }
+  .s3-chart-caption {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .s3-chart-sub {
+    font-size: 10px;
+    color: #999;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .s3-mock-meta {
+    font-size: 8px;
+    color: #bbb;
+    text-align: center;
+    padding: 4px 0 6px;
+    letter-spacing: 0.3px;
+  }
+  /* FEATS terminal screenshot image */
+  .s3-feats-terminal-img {
+    width: 100%;
+    height: auto;
+    margin-top: 4px;
+    border-radius: 0 0 8px 8px;
+    display: block;
+  }
+
+  /* Bottom badges */
+  .s3-badges {
+    display: flex;
+    gap: 10px;
+  }
+  .s3-badge {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .s3-badge-dot {
+    width: 8px; height: 8px;
+    background: #FF6B4A;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .s3-badge-main {
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .s3-badge-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 1px;
+    white-space: nowrap;
+  }
+
+  /* ===== SLIDE 4: SOCIAL IMPACT + CLOSING ===== */
+  .slide-4 {
+    background: #111111;
+    padding: 40px 56px;
+    color: #fff;
+  }
+  .s4-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .s4-section-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: #FF6B4A;
+    line-height: 1;
+  }
+  .s4-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  .s4-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.45;
+  }
+  .s4-title em {
+    font-style: normal;
+    color: #FF6B4A;
+  }
+
+  .s4-cards {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 32px;
+    align-items: stretch;
+  }
+  .s4-card-hero {
+    flex: 1.3;
+    background: rgba(255,107,74,0.12);
+    border: 1px solid rgba(255,107,74,0.25);
+    border-radius: 12px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .s4-card-hero-stat {
+    font-size: 48px;
+    font-weight: 900;
+    color: #FF6B4A;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .s4-target-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,107,74,0.2);
+    border: 1px solid rgba(255,107,74,0.3);
+    padding: 2px 8px;
+    border-radius: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .s4-card-hero-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+  .s4-sub-cards {
+    flex: 2.7;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .s4-sub-row {
+    display: flex;
+    gap: 14px;
+    flex: 1;
+  }
+  .s4-card {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 18px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .s4-card-stat {
+    font-size: 17px;
+    font-weight: 800;
+    color: #FF6B4A;
+    margin-bottom: 3px;
+    line-height: 1.2;
+  }
+  .s4-card-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+  }
+
+  .s4-closing {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,107,74,0.06);
+    border: 1px solid rgba(255,107,74,0.15);
+    border-radius: 12px;
+    padding: 20px 28px;
+  }
+  .s4-vision {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+  }
+  .s4-vision strong {
+    color: #FF6B4A;
+    font-weight: 700;
+  }
+  .s4-contact {
+    text-align: right;
+    flex-shrink: 0;
+    margin-left: 40px;
+  }
+  .s4-contact-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FF6B4A;
+    margin-bottom: 4px;
+  }
+  .s4-contact-info {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SLIDE 1: TEAM ===== -->
+<div class="slide slide-1">
+  <div class="logo-top-right">
+    <img src="mesis%20logo.png" alt="MESIS">
+  </div>
+  <div class="page-num">MESIS  01</div>
+
+  <div class="s1-header">
+    <div class="section-num">01</div>
+    <div class="s1-title-area">
+      <div class="s1-service-sub">C U R I Z M</div>
+      <div class="s1-service-name">큐리즘</div>
+      <div class="s1-tagline">명화로 마음을 읽는 <strong>AI 정서 케어 서비스</strong></div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="s1-timeline">
+    <div class="s1-timeline-line"></div>
+    <div class="s1-timeline-item">
+      <div class="s1-timeline-dot"></div>
+      <div class="s1-timeline-year">2023</div>
+      <div class="s1-timeline-desc">회사 설립<br>청년사관학교 13기</div>
+    </div>
+    <div class="s1-timeline-item">
+      <div class="s1-timeline-dot"></div>
+      <div class="s1-timeline-year">2024</div>
+      <div class="s1-timeline-desc">Seed 투자 유치<br>현대백화점 8개점 입점</div>
+    </div>
+    <div class="s1-timeline-item">
+      <div class="s1-timeline-dot"></div>
+      <div class="s1-timeline-year">2025</div>
+      <div class="s1-timeline-desc">Seed 투자 유치<br>큐리즘 서비스 출시</div>
+    </div>
+    <div class="s1-timeline-item">
+      <div class="s1-timeline-dot"></div>
+      <div class="s1-timeline-year">2026</div>
+      <div class="s1-timeline-desc">KT 기가지니 채널 개설<br>시장 확장기</div>
+    </div>
+  </div>
+
+  <!-- Revenue bars -->
+  <div class="s1-revenue">
+    <div class="s1-rev-item">
+      <div class="s1-rev-bar" style="height:5px;"></div>
+      <div class="s1-rev-amount">0.7억 <span>원</span></div>
+    </div>
+    <div class="s1-rev-item">
+      <div class="s1-rev-growth">+257%</div>
+      <div class="s1-rev-bar" style="height:16px;"></div>
+      <div class="s1-rev-amount">2.5억 <span>원</span></div>
+    </div>
+    <div class="s1-rev-item">
+      <div class="s1-rev-growth">+64%</div>
+      <div class="s1-rev-bar" style="height:26px;"></div>
+      <div class="s1-rev-amount">4.1억 <span>원</span></div>
+    </div>
+    <div class="s1-rev-item">
+      <div class="s1-rev-growth">+95%</div>
+      <div class="s1-rev-bar" style="height:38px; background: linear-gradient(180deg, #FF6B4A 0%, #e85a3a 100%); box-shadow: 0 0 8px rgba(255,107,74,0.3);"></div>
+      <div class="s1-rev-amount">8.0억 <span>목표</span></div>
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="s1-team-grid">
+    <div class="s1-team-card">
+      <img src="%EB%8C%80%ED%91%9C%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.png" alt="강의훈" class="s1-avatar-photo">
+      <div class="s1-team-info">
+        <div class="s1-team-role">CEO · FOUNDER</div>
+        <div class="s1-team-name">강의훈</div>
+        <div class="s1-team-desc">UCLA 졸업, 해외 10년 경험<br>3회 창업 · 사업 전략 총괄</div>
+      </div>
+    </div>
+    <div class="s1-team-card">
+      <img src="%EB%B9%84%EB%A6%BD_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.png" alt="비립" class="s1-avatar-photo">
+      <div class="s1-team-info">
+        <div class="s1-team-role">CTO</div>
+        <div class="s1-team-name">비립</div>
+        <div class="s1-team-desc">연세대 전산언어학 박사<br>AI · 데이터 아키텍처 · NLP 총괄</div>
+      </div>
+    </div>
+    <div class="s1-team-card">
+      <img src="%EC%84%9C%ED%98%84%EC%9E%AC_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.png" alt="서현재" class="s1-avatar-photo">
+      <div class="s1-team-info">
+        <div class="s1-team-role">CMO</div>
+        <div class="s1-team-name">서현재</div>
+        <div class="s1-team-desc">토론토대 미술사 · 박물관학 석사<br>전시기획 · 펀드레이징 · IR 총괄</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 2: PROBLEM + APPROACH ===== -->
+<div class="slide slide-2">
+  <div class="logo-top-right">
+    <img src="mesis%20logo.png" alt="MESIS">
+  </div>
+  <div class="page-num">MESIS  02</div>
+
+  <div class="s2-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-label">Problem & Approach</div>
+      <div class="section-title">정서 케어의 <em>3대 장벽</em>과 인프라 돌파 전략</div>
+    </div>
+  </div>
+
+  <div class="s2-body">
+    <!-- LEFT: 3 Barriers -->
+    <div class="s2-left">
+      <div class="s2-barrier">
+        <div class="s2-barrier-icon">₩</div>
+        <div>
+          <div class="s2-barrier-title">비용 부담</div>
+          <div class="s2-barrier-desc">대면 심리 상담 회당 비용</div>
+        </div>
+        <div class="s2-barrier-stat">10~25<span class="s2-barrier-stat-unit">만원</span></div>
+      </div>
+      <div class="s2-barrier">
+        <div class="s2-barrier-icon dark">×</div>
+        <div>
+          <div class="s2-barrier-title">심리적 거부감</div>
+          <div class="s2-barrier-desc">적기 치료율 20%, 나머지 방치</div>
+        </div>
+        <div class="s2-barrier-stat">80<span class="s2-barrier-stat-unit">%</span></div>
+      </div>
+      <div class="s2-barrier">
+        <div class="s2-barrier-icon muted">!</div>
+        <div>
+          <div class="s2-barrier-title">접근성 부족</div>
+          <div class="s2-barrier-desc">전문 기관 수도권 편중</div>
+        </div>
+        <div class="s2-barrier-stat">70<span class="s2-barrier-stat-unit">%</span></div>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="s2-divider"></div>
+
+    <!-- RIGHT: Infrastructure Approach -->
+    <div class="s2-right">
+      <div style="font-size:11px; font-weight:600; color:#666; margin-bottom:2px;">기존 인프라 활용 → 진입 비용 Zero</div>
+      <div class="s2-approach-label">OUR APPROACH</div>
+
+      <div class="s2-infra-card s2-infra-card-with-img">
+        <div class="s2-infra-text">
+          <div class="s2-infra-stat">1,200<span style="font-size:16px;font-weight:700;">개소</span></div>
+          <div class="s2-infra-name">바이오애드랩 MOU — 병·의원 네트워크</div>
+          <div class="s2-infra-desc">전국 병·의원에 TV 기반 큐리즘 배포</div>
+        </div>
+        <div>
+          <img src="%ED%8C%94%EB%8B%B9%ED%95%9C%EA%B0%95%EC%9A%94%EC%96%91%EC%9B%90%20Poc.png" alt="팔당한강요양원 PoC" class="s2-poc-img">
+          <div class="s2-poc-label">병원 PoC</div>
+        </div>
+      </div>
+
+      <div class="s2-infra-flow">
+        병·의원 TV <span class="s2-infra-flow-arrow">→</span> 가정 TV <span class="s2-infra-flow-arrow">→</span> 모바일 앱
+      </div>
+
+      <div class="s2-infra-card highlight">
+        <div class="s2-infra-stat">300<span style="font-size:16px;font-weight:700;">만 가구</span></div>
+        <div class="s2-infra-name">KT 기가지니 아트 채널 개설</div>
+        <div class="s2-infra-desc">300만 가구 + 영업소 인프라로 일상 접점 확보</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 3: SOLUTION + TECH ===== -->
+<div class="slide slide-3">
+  <div class="logo-top-right">
+    <img src="mesis%20logo.png" alt="MESIS">
+  </div>
+  <div class="page-num">MESIS  03</div>
+
+  <div class="s3-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-label">Solution & Technology</div>
+      <div class="section-title"><em>무의식</em>과 <em>의식</em>의 결합, FEATS 기반 AI 정서 분석</div>
+    </div>
+  </div>
+
+  <div class="s3-feats-note">
+    <strong>FEATS</strong>(Formal Elements Art Therapy Scale) — 미술치료학계 국제 표준 그림 평가 체계<br>
+    미술심리치료 전문가 협업 기준 수립 · <strong>골든 데이터 1,000건</strong> 구축 → 증강 10,000건 확장
+  </div>
+
+  <!-- Body: Steps left + FEATS chart right -->
+  <div class="s3-body">
+    <div class="s3-steps-col">
+      <div class="s3-step">
+        <div class="s3-step-label">Step 1. 정서 분석</div>
+        <div class="s3-step-title">멀티모달 AI 정서 스캔</div>
+        <div class="s3-step-desc">
+          <strong>명화 선택</strong>(무의식)과 <strong>언어 서술</strong>(의식)을<br>
+          결합하여 FEATS 6대 지표 기반 정서 벡터 도출
+        </div>
+      </div>
+
+      <div class="s3-step">
+        <div class="s3-step-label">Step 2. 맞춤 큐레이션</div>
+        <div class="s3-step-title">정서 특화 작품 처방</div>
+        <div class="s3-step-desc">
+          <strong>명화 10,000건</strong> FEATS 라벨링 +<br>
+          <strong>신진작가 커미션 작품</strong>으로 정서 유형별 최적 매칭
+        </div>
+      </div>
+
+      <div class="s3-step">
+        <div class="s3-step-label">Step 3. 수익 전환</div>
+        <div class="s3-step-title">상태 기반 Ad-Commerce</div>
+        <div class="s3-step-desc">
+          정서 상태 기반 <strong>오브제 · 푸드 · 향기 · 병의원 · 스파</strong> 등 연계<br>
+          광고 및 아트 커머스(고라니) 연동
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATS Analysis - Dev Screenshot -->
+    <div class="s3-chart-panel">
+      <div class="s3-mock-titlebar">
+        <div class="s3-mock-dot red"></div>
+        <div class="s3-mock-dot yellow"></div>
+        <div class="s3-mock-dot green"></div>
+        <div class="s3-mock-titlebar-text">CURIZM Analysis</div>
+      </div>
+      <div class="s3-chart-body">
+        <img src="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-03-08%20160058.png" alt="FEATS 6대 지표 레이더 차트" style="width:155px;">
+        <div class="s3-chart-caption">FEATS 6대 지표 분석</div>
+        <img src="feats_terminal.png" alt="FEATS 분석 터미널" class="s3-feats-terminal-img">
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom badges -->
+  <div class="s3-badges">
+    <div class="s3-badge">
+      <div class="s3-badge-dot"></div>
+      <div>
+        <div class="s3-badge-main">특허 3건</div>
+        <div class="s3-badge-sub">원천기술 보유</div>
+      </div>
+    </div>
+    <div class="s3-badge">
+      <div class="s3-badge-dot"></div>
+      <div>
+        <div class="s3-badge-main">1/10 비용</div>
+        <div class="s3-badge-sub">기존 상담 대비</div>
+      </div>
+    </div>
+    <div class="s3-badge">
+      <div class="s3-badge-dot"></div>
+      <div>
+        <div class="s3-badge-main">신진작가 10인</div>
+        <div class="s3-badge-sub">정서 특화 커미션 제작</div>
+      </div>
+    </div>
+    <div class="s3-badge">
+      <div class="s3-badge-dot"></div>
+      <div>
+        <div class="s3-badge-main">KT · CJ · 현대</div>
+        <div class="s3-badge-sub">대기업 협업 검증</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 4: SOCIAL IMPACT + CLOSING ===== -->
+<div class="slide slide-4">
+  <div class="logo-top-right">
+    <img src="mesis%20logo.png" alt="MESIS" class="white-logo">
+  </div>
+  <div class="page-num white">MESIS  04</div>
+
+  <div class="s4-header">
+    <div class="s4-section-num">04</div>
+    <div>
+      <div class="s4-label">Social Impact</div>
+      <div class="s4-title">예술 처방을 <em>AI로 디지털화</em>하여<br>누구나 접근 가능한 <em>정서 케어 안전망</em></div>
+    </div>
+  </div>
+
+  <div class="s4-cards">
+    <!-- Hero: main metric -->
+    <div class="s4-card-hero">
+      <div class="s4-target-badge">TARGET</div>
+      <div class="s4-card-hero-stat">18%↓</div>
+      <div class="s4-card-hero-label">정서 불안 · 스트레스<br>지수 개선 목표</div>
+    </div>
+
+    <!-- Sub cards: 2x2 grid — 3대 장벽 대응 + 데이터 주권 -->
+    <div class="s4-sub-cards">
+      <div class="s4-sub-row">
+        <div class="s4-card">
+          <div class="s4-card-stat">비용 90%↓</div>
+          <div class="s4-card-label">회당 1~2만원, 기존 상담 대비 1/10<br>연 7.5억원 외산 솔루션 대체 효과</div>
+        </div>
+        <div class="s4-card">
+          <div class="s4-card-stat">진입 장벽 해소</div>
+          <div class="s4-card-label">미술 감상 기반 비치료적 접근<br>거부감 없는 일상 속 첫 경험 제공</div>
+        </div>
+      </div>
+      <div class="s4-sub-row">
+        <div class="s4-card">
+          <div class="s4-card-stat">전국 300만+ 가구</div>
+          <div class="s4-card-label">KT 기가지니 + 바이오애드랩 전국 인프라<br>비수도권 · 고령층 · 소외계층 접근 확보</div>
+        </div>
+        <div class="s4-card">
+          <div class="s4-card-stat">데이터 주권 확보</div>
+          <div class="s4-card-label">한국적 정서 맥락에 최적화된<br>독자적 정서 분석 데이터 구축</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s4-closing">
+    <div class="s4-vision">
+      큐리즘은 <strong>일상 속 디지털 정서 처방전</strong>으로,<br>
+      국민 정신건강의 디지털 안전망을 만들어 갑니다.
+    </div>
+    <div class="s4-contact">
+      <div class="s4-contact-name">MESIS</div>
+      <div class="s4-contact-info">
+        대표 강의훈<br>
+        010-5780-1517<br>
+        contact@mesis.kr
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
